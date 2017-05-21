@@ -3,7 +3,7 @@
 // <copyright file="App.xaml.cs" company="Microsoft">
 //    Copyright (C) 2015 by Microsoft Corporation.  All rights reserved.
 // </copyright>
-//
+// Aplicativo Univsersal do Windows 10
 // <createdOn>5/18/2017 4:21:59 PM</createdOn>
 //
 //---------------------------------------------------------------------------
