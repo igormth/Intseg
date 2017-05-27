@@ -3,8 +3,8 @@
 // <copyright file="App.xaml.cs" company="Microsoft">
 //    Copyright (C) 2015 by Microsoft Corporation.  All rights reserved.
 // </copyright>
-// Aplicativo Univsersal do Windows 10
-// <createdOn>5/18/2017 4:21:59 PM</createdOn>
+//
+// <createdOn>5/22/2017 6:36:34 PM</createdOn>
 //
 //---------------------------------------------------------------------------
 
@@ -14,17 +14,11 @@ using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Microsoft.WindowsAzure.MobileServices;
-
 using IntSeg.Pages;
 
 namespace IntSeg
 {
-    /// <summary>
-    /// Provides application-specific behavior to supplement the default Application class.
-    /// </summary>
-    sealed partial class App : Application
-    {
+     
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -34,23 +28,8 @@ namespace IntSeg
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }
-        public static MobileServiceClient MobileService =
-        new MobileServiceClient("https://igormthmobile.azurewebsites.net");
-        public class TodoItem
-        {
-            public string Id { get; set; }
-            public string Text { get; set; }
-            public bool Complete { get; set; }
-        }
-        TodoItem item = new TodoItem
-        {
-            Text = "Awesome item",
-            Complete = false
-        };
-        await App.MobileService.GetTable<todoitem>().InsertAsync(item);
 
-
-        /// <summary>
+                /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>

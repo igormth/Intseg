@@ -4,7 +4,7 @@
 //    Copyright (C) 2015 by Microsoft Corporation.  All rights reserved.
 // </copyright>
 //
-// <createdOn>5/18/2017 4:21:59 PM</createdOn>
+// <createdOn>5/22/2017 6:36:34 PM</createdOn>
 //
 //---------------------------------------------------------------------------
 
@@ -12,7 +12,6 @@ using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Store;
 using Windows.Storage;
-using Windows.UI.Notifications;
 
 using AppStudio.Uwp;
 using AppStudio.Uwp.Controls;
@@ -28,20 +27,19 @@ namespace IntSeg
 		public static void Init()
         {
 			InitializeTelemetry();
-			InitializeTiles();
+			InitializeTilesAsync().FireAndForget();
 
 			BitmapCache.ClearCacheAsync(TimeSpan.FromHours(48)).FireAndForget();
 		}
 
-		private static void InitializeTiles()
+        private static async Task InitializeTilesAsync()
         {
             if (Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily.ToLower() != "windows.iot")
             {
                 var init = ApplicationData.Current.LocalSettings.Values[LocalSettingNames.TilesInitialized];
                 if (init == null || (init is bool && !(bool)init))
                 {
-                    var tileUpdater = TileUpdateManager.CreateTileUpdaterForApplication();
-                    tileUpdater.EnableNotificationQueue(true);
+                    await TileServices.CreateLiveTile(@"Assets\Tiles\tiles.xml");
                     ApplicationData.Current.LocalSettings.Values[LocalSettingNames.TilesInitialized] = true;
                 }
             }
